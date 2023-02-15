@@ -1,4 +1,4 @@
-package com.itguigu.controller.hello;
+package com.itguigu.docker.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
