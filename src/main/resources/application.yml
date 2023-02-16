@@ -1,2 +1,38 @@
 server:
   port: 9999
+
+spring:
+  datasource:
+    username: root
+    password: root
+    #url中database为对应的数据库名称
+    url: jdbc:mysql://192.168.6.9:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    database: 0
+    #cluster:
+      #nodes: 192.168.6.4:6379,192.168.6.4:6380,192.168.6.4:6381,192.168.6.4:6382,192.168.6
+      #.4:6383,192.168.6.4:6384
+    lettuce:
+      pool:
+        # 最大闲置
+        max-idle: 16
+        # 最大活跃度
+        max-active: 32
+        min-idle: 8
+    timeout: 10000
+    host: 192.168.6.9
+    port: 6379
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.itguigu.docker.entity
+
+#showSql
+logging:
+  level:
+    com.itguigu.docker.mapper: debug
+
+#redis
+
+
+
