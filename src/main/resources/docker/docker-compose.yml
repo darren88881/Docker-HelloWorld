@@ -1,0 +1,46 @@
+version: "3"
+services:
+  microService:
+    image: darren_docker:1.1
+    container_name: docker-HelloWorld
+    ports:
+      - "9999:9999"
+    volumes:
+      - /home/darren/docker/springboot/app/microService:/data
+    networks:
+      - atguigu_net
+    depends_on:
+      - redis
+      - mysql
+  redis:
+    image: redis:6.0.8
+    ports:
+      - "6379:6379"
+    volumes:
+      - /home/darren/docker/redis/redis.conf:/etc/redis/redis.conf
+      - /home/darren/docker/redis/data:/data
+    networks:
+      - atguigu_net
+    command: redis-server /etc/redis/redis.conf
+   
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: '123456'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'no'
+      MYSQL_DATABASE: 'test'
+      MYSQL_USER: 'darren'
+      MYSQL_PASSWORD: 'darren'
+    ports:
+      - "3306:3306"
+    volumes:
+      - /home/darren/docker/mysql/db:/var/lib/mysql
+      - /home/darren/docker/mysql/conf/my.cnf:/etc/my.cnf
+      - /home/darren/docker/mysql/init:/docker-entrypoint-initdb.d
+    networks:
+        - atguigu_net
+    command: --default-authentication-plugin=mysql_native_password #解决外部无法访问
+   
+networks:
+  atguigu_net:
+   
